@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+/* ============================================================
+   RunData 디자인 시스템
+   브랜드: 에메랄드/민트 (러닝·이동·현장)
+   액센트: 인디고 (데이터·AI)
+   ============================================================ */
+
+@theme {
+  /* 브랜드 스케일 (emerald) */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+
+  /* 액센트 (indigo) — 데이터/미션 */
+  --color-accent-300: #a5b4fc;
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #4f46e5;
+  --color-accent-700: #4338ca;
+
+  /* 상태 */
+  --color-success: #10b981;
+  --color-warn: #f59e0b;
+  --color-danger: #f43f5e;
+  --color-info: #0ea5e9;
+
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Noto Sans KR",
+    system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+/* 시맨틱 표면 토큰 (라이트) */
+:root {
+  --background: #f6f8f7;
+  --surface: #ffffff;
+  --surface-2: #f1f4f3;
+  --surface-inset: #eef2f0;
+  --border: #e2e8e5;
+  --border-strong: #cfd8d3;
+  --foreground: #0b1512;
+  --muted: #5c6b64;
+  --muted-2: #8a978f;
+  --ring: rgba(16, 185, 129, 0.35);
+  --shadow-color: 150 20% 20%;
+}
+
+/* 다크 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #070b0a;
+    --surface: #101614;
+    --surface-2: #161e1b;
+    --surface-inset: #0c1210;
+    --border: #202b27;
+    --border-strong: #2c3a35;
+    --foreground: #e9f1ee;
+    --muted: #9baba3;
+    --muted-2: #6b7a73;
+    --ring: rgba(52, 211, 153, 0.35);
+    --shadow-color: 160 40% 2%;
+  }
+}
+
+/* 강제 다크(러너 앱 몰입 화면 등) */
+:root[data-theme="dark"] {
+  --background: #070b0a;
+  --surface: #101614;
+  --surface-2: #161e1b;
+  --surface-inset: #0c1210;
+  --border: #202b27;
+  --border-strong: #2c3a35;
+  --foreground: #e9f1ee;
+  --muted: #9baba3;
+  --muted-2: #6b7a73;
+  --ring: rgba(52, 211, 153, 0.35);
+}
+:root[data-theme="light"] {
+  --background: #f6f8f7;
+  --surface: #ffffff;
+  --surface-2: #f1f4f3;
+  --surface-inset: #eef2f0;
+  --border: #e2e8e5;
+  --border-strong: #cfd8d3;
+  --foreground: #0b1512;
+  --muted: #5c6b64;
+  --muted-2: #8a978f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-inset: var(--surface-inset);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-brand-300);
+  color: #06251b;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-2);
+  background-clip: padding-box;
+}
+
+/* 숫자 등폭 (데이터/스탯용) */
+.tnum {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+.font-num {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}
+
+/* ---------- 재사용 유틸 ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, #059669 0%, #10b981 45%, #34d399 100%);
+}
+.brand-gradient-soft {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-brand-500) 12%, transparent),
+    color-mix(in srgb, var(--color-accent-500) 10%, transparent)
+  );
+}
+.mesh-bg {
+  background-color: var(--background);
+  background-image: radial-gradient(
+      at 12% 8%,
+      color-mix(in srgb, var(--color-brand-400) 22%, transparent) 0px,
+      transparent 45%
+    ),
+    radial-gradient(
+      at 88% 0%,
+      color-mix(in srgb, var(--color-accent-400) 18%, transparent) 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 60% 92%,
+      color-mix(in srgb, var(--color-brand-300) 14%, transparent) 0px,
+      transparent 55%
+    );
+}
+
+.glass {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* ---------- 애니메이션 ---------- */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulse-ring 1.8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.4s ease both;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--foreground) 6%, transparent),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* ---------- Leaflet 보정 ---------- */
+.leaflet-container {
+  background: var(--surface-2);
+  font-family: var(--font-sans);
+  z-index: 0;
+}
+.leaflet-container a {
+  color: var(--color-brand-600);
+}
+.rd-pin {
+  background: transparent;
+  border: none;
+}
